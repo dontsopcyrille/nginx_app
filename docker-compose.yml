@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  Frontend:
+    image: nginx
+    restart: always
+    ports:
+      - 40:80
+
+  postgres_db1:
+    container_name: postgres_db1
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - ./engineer:/var/lib/postgresql/data
+    networks:
+      - postgres  
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 50:8080
+
+volumes:
+  engineer:
+network:
+  postgres:
